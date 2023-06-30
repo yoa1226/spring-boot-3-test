@@ -1,21 +1,22 @@
 package com.example.demo.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import org.springframework.data.domain.Persistable;
 
 @MappedSuperclass
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public abstract class AbstractEntity {
+public abstract class AbstractEntity<ID> implements Persistable<ID> {
 
-	@Id
-	@GeneratedValue
-	private Long id;
+	@Override
+	public abstract ID getId();
 
+	@Transient
+	@Override
+	public boolean isNew() {
+		return getId() == null;
+	}
 }

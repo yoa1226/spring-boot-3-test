@@ -10,7 +10,7 @@ import com.example.demo.domain.AbstractTranslationEntity;
 import com.example.demo.domain.WithTranslationKey;
 
 @NoRepositoryBean
-public interface AbstractTranslationRepository<C extends AbstractEntity & WithTranslationKey, T extends AbstractTranslationEntity<C>> extends CrudRepository<T, Long> {
+public interface AbstractTranslationRepository<C extends AbstractEntity<Long> & WithTranslationKey, T extends AbstractTranslationEntity<C>> extends CrudRepository<T, Long> {
 
 	List<T> findTranslationsByClassifierId(Long classifierId);
 
