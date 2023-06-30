@@ -17,11 +17,15 @@ import lombok.ToString;
 @Table(name = "USER_TRANSLATION")
 public class UserTranslation extends AbstractTranslationEntity<User> {
 
+	@Id
+	@GeneratedValue
+	private Long id;
+
 	private String translation;
 
 	@Builder
-	UserTranslation(Long id, User classifier, String localeCode, String translation) {
-		super(id, classifier, localeCode);
+	UserTranslation(User classifier, String localeCode, String translation) {
+		super(classifier, localeCode);
 		this.translation = translation;
 	}
 }
