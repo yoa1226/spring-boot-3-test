@@ -2,8 +2,6 @@ package com.example.demo.domain;
 
 import javax.persistence.Column;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
@@ -18,11 +16,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public abstract class AbstractTranslationEntity<T extends AbstractEntity<Long> & WithTranslationKey> extends AbstractEntity {
-
-	@Id
-	@GeneratedValue
-	private Long id;
+public abstract class AbstractTranslationEntity<T extends AbstractEntity<Long> & WithTranslationKey> extends AbstractEntity<Long> {
 
 	@JoinColumn(name = "CLASSIFIER_ID", nullable = false)
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -31,8 +25,7 @@ public abstract class AbstractTranslationEntity<T extends AbstractEntity<Long> &
 	@Column(name = "LOCALE_CODE", length = 15, nullable = false)
 	private String localeCode;
 
-	AbstractTranslationEntity(Long id, T classifier, String localeCode) {
-		this.id = id;
+	AbstractTranslationEntity(T classifier, String localeCode) {
 		this.classifier = classifier;
 		this.localeCode = localeCode;
 	}
