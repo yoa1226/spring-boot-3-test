@@ -1,18 +1,10 @@
 package com.example.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-@Data
-@NoArgsConstructor
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "USER_TRANSLATION")
 public class UserTranslation extends AbstractTranslationEntity<User> {
@@ -23,9 +15,28 @@ public class UserTranslation extends AbstractTranslationEntity<User> {
 
 	private String translation;
 
-	@Builder
-	UserTranslation(User classifier, String localeCode, String translation) {
+	public UserTranslation() {
+	}
+
+	public UserTranslation(User classifier, String localeCode, String translation) {
 		super(classifier, localeCode);
 		this.translation = translation;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	public String getTranslation() {
+		return translation;
+	}
+
+	@Override
+	public String toString() {
+		return "UserTranslation{" +
+				"id=" + id +
+				", translation='" + translation + '\'' +
+				'}';
 	}
 }

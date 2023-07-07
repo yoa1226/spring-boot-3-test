@@ -1,16 +1,10 @@
 package com.example.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity(name = "USERS")
-@Data
-@NoArgsConstructor
 public class User extends AbstractEntity<Long> implements WithTranslationKey {
 
 	@Id
@@ -24,9 +18,24 @@ public class User extends AbstractEntity<Long> implements WithTranslationKey {
 		return name;
 	}
 
-	@Builder
-	User(Long id, String name) {
-		this.id = id;
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public User(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				'}';
 	}
 }

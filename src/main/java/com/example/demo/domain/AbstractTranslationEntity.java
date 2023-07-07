@@ -1,23 +1,12 @@
 package com.example.demo.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-@Data
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
 public abstract class AbstractTranslationEntity<T extends AbstractEntity<Long> & WithTranslationKey> extends AbstractEntity<Long> {
 
 	@JoinColumn(name = "CLASSIFIER_ID", nullable = false)
@@ -27,8 +16,20 @@ public abstract class AbstractTranslationEntity<T extends AbstractEntity<Long> &
 	@Column(name = "LOCALE_CODE", length = 15, nullable = false)
 	private String localeCode;
 
+	public AbstractTranslationEntity() {
+	}
+
 	AbstractTranslationEntity(T classifier, String localeCode) {
 		this.classifier = classifier;
 		this.localeCode = localeCode;
 	}
+
+	public T getClassifier() {
+		return classifier;
+	}
+
+	public String getLocaleCode() {
+		return localeCode;
+	}
+
 }
