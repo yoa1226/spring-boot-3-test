@@ -1,17 +1,15 @@
 package com.example.demo.domain;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "USER_TRANSLATION")
 public class UserTranslation extends AbstractTranslationEntity<User> {
 
-	@Id
-	@GeneratedValue
-	private Long id;
+//	@Id
+//	@GeneratedValue
+//	private Long id;
 
 	private String translation;
 
@@ -25,18 +23,23 @@ public class UserTranslation extends AbstractTranslationEntity<User> {
 
 	@Override
 	public Long getId() {
-		return id;
+		return super.getId();
+	}
+
+	@Override
+	public void setId(Long aLong) {
+		super.setId(aLong);
 	}
 
 	public String getTranslation() {
 		return translation;
 	}
 
-	@Override
-	public String toString() {
-		return "UserTranslation{" +
-				"id=" + id +
-				", translation='" + translation + '\'' +
-				'}';
+	public void setTranslation(String translation) {
+		this.translation = translation;
 	}
+
+//	@Override
+//	public String toString() {
+//	}
 }
